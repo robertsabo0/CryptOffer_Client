@@ -8,7 +8,7 @@ import { AdsService } from "src/app/ads.service";
   styleUrls: ['./addads.component.css']
 })
 export class AddadsComponent implements OnInit {
-
+// fuck my sistem
   ad: Ad;
   success: string; // good | bad  -> for allert
 
