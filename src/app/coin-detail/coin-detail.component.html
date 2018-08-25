@@ -1,0 +1,36 @@
+<div class="card bg-light mb-12">
+  <div class="card-body">
+    <h2 class="card-title">{{coinDet.name}}</h2>
+    <span><img class="card-body" src="{{coinDet.imageLink}}" width="200px" height="200px"></span>
+    <h5 class="card-title">{{coinDet.name | uppercase}}</h5>
+    <p class="card-text">You have {{coinDet.amount | number : '1.2-2'}} {{coinDet.symbol}}</p>
+    <p class="card-text">Total investment in {{coinDet.symbol}}  is {{coinDet.input | number : '1.2-2'}} €</p>
+    <br/>
+    <p class="card-text">Current price is {{coinDet.currentPrice | number : '1.2-2'}} €/{{coinDet.symbol}}</p>
+    <p class="card-text">That means that you current capital is {{coinDet.currentCapital | number : '1.2-2'}} €</p>
+    <p class="card-text">So, in this moment your profit is {{coinDet.profit | number : '1.2-2'}} €, that is {{coinDet.percentualProfit | number : '1.2-2'}}% of total investment.</p>
+    <br/>
+    <p class="card-text">Price before 7 days was {{coinDet.priceBefore7days | number : '1.2-2'}}, so difference from now is : {{coinDet.differenceBetween7daysAndNow | number : '1.2-2'}}</p>
+    <a href="{{coinDet.linkToCoinMarketCup}}" target="blank" class="btn btn-primary">Check more about historical prices</a>
+    <br/><br/><br/>
+    <h3> Transacions</h3>
+    <table class="table table-striped">
+      <thead>
+        <th scope="col">Date of transacion</th>
+        <th scope="col">Money amount</th>
+        <th scope="col">Price on date</th>
+        <th scope="col">Cryptocurrency amount</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of coinDet.buyings">
+          <td>{{b.date | date:'y-MM-dd, HH:mm'}}</td>
+          <td>{{b.input | number : '1.2-2'}} €</td>
+          <td>{{b.price | number : '1.2-2'}} €/{{coinDet.symbol}}</td>
+          <td>{{b.amount | number : '1.2-2'}} {{coinDet.symbol}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/><br/>
+    <a href="/dashboard" class="btn btn-primary">Back to dashboard</a>
+  </div>
+</div>

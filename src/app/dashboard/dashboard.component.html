@@ -1,0 +1,74 @@
+<div class="cointainer">
+  <div class="row">
+    <div class="col-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <td colspan="3">
+              <h5>Current balance review</h5>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Total investment</td>
+            <td colspan="2">{{totalinput | number : '1.2-2'}} €</td>
+          </tr>
+          <tr>
+            <td>Current capital</td>
+            <td colspan="2">{{totalCurrentCapital | number : '1.2-2'}} €</td>
+          </tr>
+          <tr>
+            <td>Profit</td>
+            <td>{{profit | number : '1.2-2'}} €</td>
+            <td>{{profitPercentual | number : '1.2-2'}} %</td>
+          </tr>
+        </tbody>
+      </table>
+      <br/><br/><br/>
+      <a href="add-transacion" class="btn btn-primary btn-lg btn-block">Add new transacion</a>
+    </div>
+
+    <div class="col-6">
+      <h5>My coins review</h5>
+      <ul class="list-group">
+        <li *ngFor="let coin of mycoins" class="list-group-item">
+          <div class="card">
+            <a routerLink="/coin-details/{{coin.symbol}}">
+              <span><img class="card-body" src="{{coin.imageLink}}" width="200px" height="200px"></span>
+              <div class="card-body">
+                <p class="card-text">{{coin.symbol}}</p>
+              </div>
+
+            </a>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Amount:</td>
+                  <td colspan="2">{{coin.amount | number : '1.2-2'}} {{coin.symbol}}</td>
+                </tr>
+                <tr>
+                  <td>Total input:</td>
+                  <td colspan="2">{{coin.input | number : '1.2-2'}} €</td>
+                </tr>
+                <tr>
+                  <td>Current price:</td>
+                  <td  colspan="2">{{coin.currentPrice | number : '1.2-2'}} €/{{coin.symbol}}</td>
+                </tr>
+                <tr>
+                  <td>Current capital:</td>
+                  <td  colspan="2">{{coin.currentCapital | number : '1.2-2'}}€</td>
+                </tr>
+                <tr>
+                  <td>Profit: </td>
+                  <td>{{coin.profit | number : '1.2-2'}} €</td>
+                  <td>{{coin.percentualProfit | number : '1.2-2'}}%</td>
+                </tr>
+                <tbody>
+            </table>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

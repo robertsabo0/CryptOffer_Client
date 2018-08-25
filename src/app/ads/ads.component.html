@@ -1,0 +1,64 @@
+<div>
+  <h1>Ads</h1>
+
+  <div class="row justify-content-center">
+    <div class="form-inline">
+      <input class="form-control" [(ngModel)]="symbol" placeholder="symbol"/>
+      <button (click)="getAds()" class="btn btn-primary">Search</button>
+      <button (click)="getAllAds()" class="btn btn-secondary">Clear</button>
+    </div>
+  </div>
+  <div *ngIf="message">
+    <h4>{{message}}</h4>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Buy/Sell</th>
+        <th scope="col">Symbol</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date of upload</th>
+        <th scope="col">Set by user</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ad of ads">
+        <td>
+          <span *ngIf="ad.isBuying"><img width="30" height="30" src="https://image.ibb.co/jJELZo/buy.png"/></span>
+          <span *ngIf="!ad.isBuying"><img width="30" height="30" src="https://image.ibb.co/hOGCfT/sell.png"/></span>
+        </td>
+        <td>{{ad.symbol | uppercase}}</td>
+        <td>{{ad.amount | number : '1.2-2'}}</td>
+        <td>{{ad.date | date:'y-MM-dd, HH:mm'}}</td>
+        <td>{{ad.username}}</td>
+        <td>
+          <button *ngIf="ad.username === sessionusername" type="button" class="btn btn-default btn-sm" (click)="adRealized(ad)">
+            <span class="glyphicon glyphicon-ok" ></span>Realized 
+          </button>
+          <button *ngIf="ad.username !== sessionusername" type="button" class="btn btn-default btn-sm" (click)="adToWallet(ad)">
+            <span class="glyphicon glyphicon-ok" ></span>Realize with my wallet
+          </button>
+          
+        </td>
+      </tr> 
+
+    </tbody>
+  </table>
+      <br/>
+      <div *ngIf="success==='good'" class="alert alert-success" role="alert">
+        Successully realized the transaction!
+      </div>
+      <div *ngIf="success==='bad'" class="alert alert-danger" role="alert">
+        Something is wrong... Transaction was not realized!
+      </div>
+      <div *ngIf="successTrans==='good'" class="alert alert-success" role="alert">
+        Successully realized the transaction!
+      </div>
+      <div *ngIf="successTrans==='bad'" class="alert alert-danger" role="alert">
+        Something is wrong... Transaction was not realized!
+      </div>
+      <br/><br/>
+      <a href="app-addad" class="btn btn-primary btn-lg btn-block">Add new advertisement</a>
+      <br/><br/><br/>
+</div>
