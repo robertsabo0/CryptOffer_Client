@@ -33,7 +33,6 @@ export class WalletService {
   ) {}
 
   getCoins():Observable<Coin[]>{
-   
     return this.http.get<Coin[]>(this.coinsUrl,httpOptions).pipe(
         tap(t => {console.log("coins fetched "); console.log(t);})
       );

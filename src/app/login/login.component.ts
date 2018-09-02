@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "src/app/auth.service";
-import { ActivatedRoute,Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -35,9 +36,18 @@ export class LoginComponent implements OnInit {
   login():void{
     console.log("login");
     this.auth.checkUserAndPass(this.username, this.password).subscribe(
-      t =>{
-        console.log(t);
+      (data:any) =>{
+        console.log('succesfull login: '+data);
+        console.log("username "+this.username);
+        console.log('');
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('username', this.username);
         this.router.navigate(['dashboard']);
+      },
+      (err: any)=>{
+        console.log("error "+err);
+        var stat = err.status;
+        this.router.navigate(['login/'+stat]);
       }
       );
   }

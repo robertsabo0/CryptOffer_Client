@@ -30,13 +30,13 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     DlDateTimePickerDateModule,
   ],
-  providers: [
+  /*providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     }
-  ],
+  ],*/
   bootstrap: [AppComponent]
 })
 export class AppModule { }

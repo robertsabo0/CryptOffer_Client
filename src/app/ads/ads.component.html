@@ -34,7 +34,7 @@
         <td>{{ad.username}}</td>
         <td>
           <button *ngIf="ad.username === sessionusername" type="button" class="btn btn-default btn-sm" (click)="adRealized(ad)">
-            <span class="glyphicon glyphicon-ok" ></span>Realized 
+            <span class="glyphicon glyphicon-ok" ></span>Delete  
           </button>
           <button *ngIf="ad.username !== sessionusername" type="button" class="btn btn-default btn-sm" (click)="adToWallet(ad)">
             <span class="glyphicon glyphicon-ok" ></span>Realize with my wallet
