@@ -13,6 +13,7 @@ import { AddadsComponent } from './addads/addads.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './tokeninterceptor';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from "src/app/auth.guard";
 
 @NgModule({
   declarations: [
@@ -30,13 +31,13 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     DlDateTimePickerDateModule,
   ],
-  /*providers: [
+  providers:[
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     }
-  ],*/
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

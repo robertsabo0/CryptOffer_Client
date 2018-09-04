@@ -20,24 +20,30 @@ export class TokenInterceptor implements HttpInterceptor {
                 private router : Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    /*
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Basic ${this.auth.getToken()}`
-      }
-    });*/
+    
+    var hasAuthReq:boolean = request.headers.get('Authorization') != null;
+    if( !hasAuthReq && this.auth.isAuthenticated()){
+      console.log('its logedin');
+      request = request.clone({ setHeaders: {Authorization: `bearer ${this.auth.getToken()}`}});//.headers.append('Authorization', `bearer ${this.auth.getToken()}`);
+      console.log('headers: '+request.headers);
+    }
+
     console.log("intercepted");
     return next.handle(request).do((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         
       }
     }, (err: any) => {
-      /*if (err instanceof HttpErrorResponse) {
+      console.log('got eer');
+      if (err instanceof HttpErrorResponse) {
+        console.log('jes it is');
+        console.log('status '+err.status);
         if (err.status === 401 || err.status === 403) {
               localStorage.setItem('error', err.status+"")
               this.router.navigate(['/login/'+err.status]);
         }
-      }*/
+        this.router.navigate(['/login']);
+      }
     });
   }
 }

@@ -4,6 +4,7 @@ import { HttpHeaders } from "@angular/common/http";
 import { SERVER_URL, AUTH_SERVER_URL, CLIENT_ID, CLIENT_SECRET } from "src/app/config";
 import { catchError, map, tap } from 'rxjs/operators';
 import { of, Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 
 
@@ -13,7 +14,8 @@ import { of, Observable } from "rxjs";
 export class AuthService {
 
   constructor(
-    private http : HttpClient) { }
+    private http : HttpClient,
+    private router: Router) { }
 
   public getToken(): string {
     return localStorage.getItem('token');
@@ -21,7 +23,7 @@ export class AuthService {
 
   public checkUserAndPass(user:string, pas:string):Observable<any>{
     var data = "username="+user+"&password="+pas+"&grant_type=password";
-    var url = AUTH_SERVER_URL + "token";//+"?"+data;
+    var url = AUTH_SERVER_URL + "token";
 
     var tok = btoa(CLIENT_ID+':'+CLIENT_SECRET);
     var  httpOptions = {
@@ -51,24 +53,11 @@ export class AuthService {
       })
     )*/
   }
-  public logout():Observable<any>{
+  public logout(){
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
-     var  httpOptions = {
-        headers: new HttpHeaders({ 
-          'Access-Control-Allow-Origin':'*',
-          'Content-Type':'application/x-www-form-urlencoded',
-          "Authorization":`Basic aaa`
-        }),
-        withCredentials: true
-      };
-    return this.http.get<any>(AUTH_SERVER_URL,httpOptions)
-    .pipe(
-        tap(() => {
-          console.log("logout");
-      })
-    )
-    
+    localStorage.removeItem('username'); 
+    console.log('logout');
+    this.router.navigate(['login']);
   }
 
   public isAuthenticated(): boolean {
@@ -78,5 +67,6 @@ export class AuthService {
     // whether or not the token is expired
     return localStorage.getItem('token') ? true : false;
   }
+
 
 }

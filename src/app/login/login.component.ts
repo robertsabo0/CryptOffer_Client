@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       (data:any) =>{
         console.log('succesfull login: '+data);
         console.log("username "+this.username);
-        console.log('');
+        console.log("token "+ data.access_token);
         localStorage.setItem('token', data.access_token);
         localStorage.setItem('username', this.username);
         this.router.navigate(['dashboard']);

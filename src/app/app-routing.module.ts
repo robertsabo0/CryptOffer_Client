@@ -8,11 +8,12 @@ import { AdsComponent } from "src/app/ads/ads.component";
 import { AddbuyingComponent } from "src/app/addbuying/addbuying.component";
 import { AddadsComponent } from "src/app/addads/addads.component";
 import { LoginComponent } from "src/app/login/login.component";
+import { AuthGuard } from "src/app/auth.guard";
 
 const routes: Routes = [
-    {path:'', redirectTo: '/login', pathMatch:'full'},
-    {path:'dashboard', component: DashboardComponent},
-    {path:'coin-details/:symbol', component: CoinDetailComponent},
+    {path:'', redirectTo: '/login', pathMatch:'full', canActivate:[AuthGuard]},
+    {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+    {path:'coin-details/:symbol', component: CoinDetailComponent, canActivate:[AuthGuard]},
     {path:'ads',component:AdsComponent},
     {path:'ads/:symbol',component:AdsComponent},
     {path:'add-transacion',component:AddbuyingComponent},
